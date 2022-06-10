@@ -1,5 +1,6 @@
 tap 'homebrew/cask'
 tap 'homebrew/cask-versions'
+tap 'homebrew/cask-fonts'
 
 
 brew 'autojump'
@@ -27,3 +28,4 @@ cask 'obsidian'
 cask 'rectangle'
 cask 'spotify'
 cask 'signal'
+cask 'font-hack-nerd-font'
