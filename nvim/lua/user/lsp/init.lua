@@ -1,8 +1,3 @@
-local status_ok, _ = pcall(require, "lspconfig")
-if not status_ok then
-    return
-end
-
 vim.diagnostic.config({
     virtual_text = false, -- Turn off inline diagnostics
     signs = { active = signs },
@@ -41,43 +36,19 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
-require("user.lsp.null-ls").setup(on_attach)
--- require("user.lsp.null-ls")
-
-
-local lsp_installer = require("nvim-lsp-installer")
-
--- Register a handler that will be called for each installed server when it's ready (i.e. when installation is finished
--- or if the server is already installed).
-lsp_installer.on_server_ready(function(server)
-    local opts = {
-        on_attach = on_attach,
-        capabilities = capabilities
-    }
-
-    -- (optional) Customize the options passed to the server
-    if server.name == "tsserver" then
-        local ts_utils = require("nvim-lsp-ts-utils")
-        local ts_utils_settings = {
-            -- debug = true,
-            import_all_scan_buffers = 100,
-            update_imports_on_move = true,
-            -- filter out dumb module warning
-            filter_out_diagnostics_by_code = { 80001 },
-            auto_inlay_hints = false,
-        }
-
-        opts.on_attach = function(client, _)
-            ts_utils.setup(ts_utils_settings)
-            ts_utils.setup_client(client)
-
-            client.resolved_capabilities.document_formatting = false
-            client.resolved_capabilities.document_range_formatting = false
-        end
-    end
-
-    -- This setup() function will take the provided server configuration and decorate it with the necessary properties
-    -- before passing it onwards to lspconfig.
-    -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-    server:setup(opts)
-end)
+local servers = { 'rust_analyzer' }
+for _, lsp in ipairs(servers) do
+  require('lspconfig')[lsp].setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    },
+    settings = {
+      ['rust-analyzer'] = {
+        rustfmt = {
+            extraArgs = {"+nightly", },
+        },
+      },
+    },
+  }
+end
