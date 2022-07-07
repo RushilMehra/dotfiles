@@ -43,8 +43,10 @@ return packer.startup(function(use)
   use "wbthomason/packer.nvim" -- Have packer manage itself
 
   -- Colorschemes
+  use 'gruvbox-community/gruvbox'
   use 'sainnhe/gruvbox-material'
   use 'rebelot/kanagawa.nvim'
+  use 'folke/tokyonight.nvim'
 
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
@@ -53,7 +55,6 @@ return packer.startup(function(use)
   use 'tpope/vim-fugitive'
   use 'lewis6991/gitsigns.nvim'
   use 'tpope/vim-sleuth'
-  use 'ggandor/lightspeed.nvim'
   use 'kyazdani42/nvim-tree.lua'
   use 'windwp/nvim-autopairs' -- pair characters ( [], {}, etc)
   use 'leafOfTree/vim-matchtag' -- highlights matching character
