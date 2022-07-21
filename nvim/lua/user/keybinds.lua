@@ -10,4 +10,4 @@ keymap('i', 'jk', '<Esc>', opts)
 keymap('n', '<Space>', '<C-w>', opts)
 
 keymap('t', '<Esc>', '<C-\\><C-n>', opts)
-
+keymap('n', 's', '<Plug>Lightspeed_omni_s', opts)
